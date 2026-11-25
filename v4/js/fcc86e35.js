@@ -1,0 +1,1 @@
+import{CommonMSCH585 as m}from"./06c30be2.js";import"./index.b74aff06.js";class e extends m{defaultMatrix=[1,0,240,0,1,0,241,0,1,0,242,0,1,0,244,0,1,0,243,0,10,5,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,249,1,1,0,249,255,1,0,245,1,1,0,245,255]}export{e as Mouse_ry6601_frm_3311_3m_1k};

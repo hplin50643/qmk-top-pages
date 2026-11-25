@@ -1,0 +1,1 @@
+import{CommonMs8KPan1080 as e}from"./b101f8d0.js";import"./0c254436.js";import"./index.b74aff06.js";class n extends e{getDeviceIsBoot=async()=>!0;getUSBVersion=async()=>0;getRFVersion=async()=>0}export{n as Mouse8khelp};

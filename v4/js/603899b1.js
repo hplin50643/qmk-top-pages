@@ -1,0 +1,1 @@
+import{CommonDgCh585 as o}from"./4c82e7f0.js";import"./88bd563e.js";import"./index.b74aff06.js";import"./2eeb2c92.js";import"./de3119a2.js";class n extends o{getDeviceIsBoot=async()=>!0;getUSBVersion=async()=>0;getRFVersion=async()=>0}export{n as DongleCh585help};

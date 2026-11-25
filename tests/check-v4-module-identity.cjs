@@ -12,17 +12,21 @@ const base = 'https://example.test/qmk-top-pages/v4/';
 const entry = new URL(match[1], base).href;
 const scripts = path.join(root, 'js');
 let references = 0;
-// The startup screen and AJ159 device loader both import the entry module.
-for (const file of ['5a012036.js', '58fd3f33.js']) {
+// Check every device and layout chunk, including files renamed by a new build.
+const chunks = new Set(fs.readdirSync(scripts).filter(file => file.endsWith('.js')));
+for (const file of chunks) {
   const source = fs.readFileSync(path.join(scripts, file), 'utf8');
-  const pattern = /["'](\.\/index\.[^"'?#]+\.js(?:\?[^"']*)?)["']/g;
+  const pattern = /["']\.\/([^/"'\\?#]+\.js)([?#][^"']*)?["']/g;
   for (const ref of source.matchAll(pattern)) {
+    const [, target, suffix = ''] = ref;
+    if (!chunks.has(target)) throw new Error(`${file} references missing chunk ${target}`);
+    if (!target.startsWith('index.')) continue;
+    const resolved = new URL(target + suffix, new URL(`js/${file}`, base));
     references++;
-    const resolved = new URL(ref[1], new URL(`js/${file}`, base)).href;
-    if (resolved !== entry) {
-      throw new Error(`${file} imports ${resolved}, but HTML loads ${entry}`);
+    if (resolved.href !== entry) {
+      throw new Error(`${file} imports ${resolved.href}, but HTML loads ${entry}`);
     }
   }
 }
 if (!references) throw new Error('No lazy chunk references to the V4 entry were found');
-console.log(`V4 entry matches ${references} lazy chunk references: ${entry}`);
+console.log(`Checked local JS references in ${chunks.size} V4 files. All ${references} entry references resolve to ${entry}.`);

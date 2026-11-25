@@ -1,0 +1,1 @@
+import{C as e}from"./280dfce7.js";import"./index.b74aff06.js";import"./2eeb2c92.js";import"./de3119a2.js";class m extends e{getUSBVersion=async()=>0;getRFVersion=async()=>0;getDeviceIsBoot=async()=>!0}export{m as Ry5088Help};
